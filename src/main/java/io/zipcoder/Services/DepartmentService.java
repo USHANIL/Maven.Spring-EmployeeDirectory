@@ -22,6 +22,10 @@ public class DepartmentService {
         return departmentRepository.findById(id).get();
     }
 
+    public Iterable<Department> getAllDepartments(){
+        return departmentRepository.findAll();
+    }
+
     public Department createDept(Department department){
         return departmentRepository.save(department);
     }

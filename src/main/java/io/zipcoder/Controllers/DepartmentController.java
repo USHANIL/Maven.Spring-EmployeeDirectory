@@ -29,6 +29,12 @@ public class DepartmentController {
         return new ResponseEntity<Department>(service.getDepartment(id), HttpStatus.OK);
     }
 
+    //get all employees
+    @GetMapping("/departments")
+    public ResponseEntity<Iterable<Department>> getAllDepartments () {
+        return new ResponseEntity<>(service.getAllDepartments(), HttpStatus.OK);
+    }
+
     //create new department
     @PostMapping("/department")
     public ResponseEntity<Department> newDepartment (@RequestBody Department department) {

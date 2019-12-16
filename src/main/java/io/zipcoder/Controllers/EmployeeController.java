@@ -41,8 +41,9 @@ public class EmployeeController {
 
     //post employee
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.CREATED);
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id,@RequestBody Employee employee) {
+        employee.setEmployeeNumber(id);
+        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.OK);
     }
 
     @DeleteMapping("/employees/{id}")
@@ -51,5 +52,28 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    /* test data
+    {
+        "employeeNumber": 1,
+        "firstName": "Usha",
+        "lastName": "kun",
+        "title":"lead",
+        "phoneNumber": "9999",
+        "email": "ush@test.com",
+        "department":1
+
+    }
+    {
+
+        "firstName": "anil",
+        "lastName": "kun",
+        "title":"Lead",
+        "phoneNumber": "999788",
+        "email": "anil@test.com",
+        "manager": {"employeeNumber":1}
+
+    }
+     */
 
 }
