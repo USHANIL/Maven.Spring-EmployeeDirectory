@@ -59,4 +59,12 @@ public class DepartmentController {
 
  */
 
+/*test data
+    {
+      "name": "HR",
+    	"manager": {"employeeNumber":1}
+
+    }
+ */
+
 }
