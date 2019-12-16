@@ -6,25 +6,11 @@ import javax.persistence.*;
 public class Department {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String name;
-
-    @ManyToOne
+    @OneToOne
     private Employee manager;
-
-    public Department() {
-    }
-
-    public Department(String name) {
-        this(null, name);
-    }
-
-    public Department(Long id, String name) {
-        this.id = id;
-        this.name = name;
-
-    }
 
     public Long getId() {
         return id;
@@ -49,6 +35,4 @@ public class Department {
     public void setManager(Employee manager) {
         this.manager = manager;
     }
-
-
 }

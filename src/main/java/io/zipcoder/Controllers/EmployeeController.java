@@ -5,8 +5,7 @@ import io.zipcoder.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EmployeeController {
@@ -22,8 +21,35 @@ public class EmployeeController {
         return "it Works";
     }
 
+    //get all employees
     @GetMapping("/employees")
     public ResponseEntity<Iterable<Employee>> getAllEmployees () {
-        return new ResponseEntity<Iterable<Employee>>(employeeService.getAllEmployees(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
+
+    //get employee by id
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+        return new ResponseEntity<>(employeeService.getEmployee(id), HttpStatus.OK);
+    }
+
+    //post employee
+    @PostMapping("/employees")
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.createEmployee(employee), HttpStatus.CREATED);
+    }
+
+    //post employee
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 }

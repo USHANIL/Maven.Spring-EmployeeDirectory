@@ -1,23 +1,27 @@
 package io.zipcoder.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 public class Employee {
+
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long employeeNumber;
     private String firstName;
     private String lastName;
     private String title;
     private String phoneNumber;
     private String email;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Employee manager;
+    private Long departmentNum;
 
-    private Integer departmentNum;
 
-    public Employee() {
+    public Employee(){
+
     }
 
     public Employee(String firstName, String lastName, String title, String phoneNumber, String email) {
@@ -28,12 +32,12 @@ public class Employee {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
+    public Long getEmployeeNumber() {
+        return employeeNumber;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmployeeNumber(Long employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
     public String getFirstName() {
@@ -84,13 +88,11 @@ public class Employee {
         this.manager = manager;
     }
 
-    public Integer getDepartmentNum() {
+    public Long getDepartmentNum() {
         return departmentNum;
     }
 
-    public void setDepartmentNum(Integer departmentNum) {
+    public void setDepartmentNum(Long departmentNum) {
         this.departmentNum = departmentNum;
     }
-
-
 }
